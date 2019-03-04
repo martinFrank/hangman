@@ -32,7 +32,7 @@ public class Hangman implements CommandProvider {
         if (isDead()) {
             System.out.println("SOLUTION: " + word.show());
         }
-        System.out.println(letters.show());
+        System.out.println("LETTERS: " + letters.show());
         if (isSolved()) {
             System.out.println("Congratulations - you did it!!");
         } else {
