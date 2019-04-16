@@ -1,11 +1,14 @@
 package de.elite.games.hangman;
 
+import de.elite.games.cli.Command;
 import de.elite.games.cli.Response;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 public class HangManTest {
 
@@ -40,14 +43,14 @@ public class HangManTest {
     }
 
     @Test
-    public void testCommands() {
+    public void testCommandList() {
         Hangman hangman = new Hangman(System.out);
         hangman.setup("Test");
         Assert.assertEquals(4, hangman.getCommands().asList().size());
     }
 
     @Test
-    public void testResonse() {
+    public void testResponse() {
         Hangman hangman = new Hangman(System.out);
         Response responseShow = hangman.show();
         Response responseLetter = hangman.tryLetter("a");
@@ -62,5 +65,59 @@ public class HangManTest {
         Assert.assertFalse(responseShow.failed());
         Assert.assertFalse(responseLetter.failed());
         Assert.assertFalse(responseWord.failed());
+    }
+
+    @Test
+    public void testLetterCommand() {
+        Hangman hangman = new Hangman(System.out);
+        Optional<Command> letterCommand = hangman.getCommands().asList().stream().filter(c -> c.isIdentifier("letter")).findAny();
+        if (letterCommand.isPresent()) {
+            Response emptyResponse = letterCommand.get().execute(Collections.emptyList());
+            Assert.assertTrue(emptyResponse.failed());
+
+            List<String> tooMuchLetter = Arrays.asList("a", "b");
+            Response tooMuchLetterResponse = letterCommand.get().execute(tooMuchLetter);
+            Assert.assertTrue(tooMuchLetterResponse.failed());
+
+            List<String> tooLongLetter = Collections.singletonList("abc");
+            Response tooLongLetterResponse = letterCommand.get().execute(tooLongLetter);
+            Assert.assertTrue(tooLongLetterResponse.failed());
+
+            List<String> perfectMatch = Collections.singletonList("a");
+            Response perfectMatchResponse = letterCommand.get().execute(perfectMatch);
+            Assert.assertTrue(perfectMatchResponse.failed());
+
+            hangman.setup("abc");
+            perfectMatchResponse = letterCommand.get().execute(perfectMatch);
+            Assert.assertFalse(perfectMatchResponse.failed());
+        } else {
+            Assert.fail();
+        }
+
+    }
+
+    @Test
+    public void testWordCommand() {
+        Hangman hangman = new Hangman(System.out);
+        Optional<Command> wordCommand = hangman.getCommands().asList().stream().filter(c -> c.isIdentifier("solve")).findAny();
+        if (wordCommand.isPresent()) {
+            Response emptyResponse = wordCommand.get().execute(Collections.emptyList());
+            Assert.assertTrue(emptyResponse.failed());
+
+            List<String> tooMuchWords = Arrays.asList("abc", "def");
+            Response tooMuchWordsResponse = wordCommand.get().execute(tooMuchWords);
+            Assert.assertTrue(tooMuchWordsResponse.failed());
+
+            List<String> perfectMatch = Collections.singletonList("abc");
+            Response perfectMatchResponse = wordCommand.get().execute(perfectMatch);
+            Assert.assertTrue(perfectMatchResponse.failed());
+
+            hangman.setup("abc");
+            perfectMatchResponse = wordCommand.get().execute(perfectMatch);
+            Assert.assertFalse(perfectMatchResponse.failed());
+        } else {
+            Assert.fail();
+        }
+
     }
 }
