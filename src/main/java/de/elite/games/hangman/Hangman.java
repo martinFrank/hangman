@@ -75,7 +75,7 @@ public class Hangman implements CommandProvider {
         return Response.success();
     }
 
-    private boolean isSolved() {
+    public boolean isSolved() {
         return word.isSolved(letters);
     }
 
