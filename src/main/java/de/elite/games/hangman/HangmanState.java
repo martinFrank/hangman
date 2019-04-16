@@ -41,6 +41,8 @@ class HangmanState {
         }
     }
 
+    @SuppressWarnings({"squid:S3776", "squid:S1192"})
+        //honestly i tried to find a solution here, even on https://codereview.stackexchange.com/ but i didn't find anything
     void show(PrintStream out) {
         out.println("    " + (p(State.TWO) ? "________" : ""));
         out.println("    " + (p(State.FOUR) ? "|" : " ") + "      " + (p(State.THREE) ? "\\" : " ") + (p(State.ONE) ? "|" : " "));
@@ -53,12 +55,10 @@ class HangmanState {
         out.println(" |    " + (p(State.DEAD) ? "R.I.P" : "     ") + "     |");
     }
 
-    //after state
     private boolean p(State dest) {
         return state.passed(dest);
     }
 
-    //twoDigit
     private String s() {
         if (state == State.DEAD) {
             return "" + state.s;

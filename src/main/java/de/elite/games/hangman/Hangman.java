@@ -4,6 +4,7 @@ import de.elite.games.cli.CommandList;
 import de.elite.games.cli.CommandProvider;
 import de.elite.games.cli.Response;
 
+import java.io.PrintStream;
 import java.util.Optional;
 
 public class Hangman implements CommandProvider {
@@ -12,9 +13,11 @@ public class Hangman implements CommandProvider {
     private Word word;
     private Letters letters = new Letters();
     private HangmanState hangmanState;
+    private final PrintStream out;
 
-    Hangman() {
+    Hangman(PrintStream out) {
         commandProvider = new HangmanCommandProvider(this);
+        this.out = out;
     }
 
     @Override
@@ -26,26 +29,26 @@ public class Hangman implements CommandProvider {
         if (word == null) {
             return Response.fail("word is not defined");
         }
-        hangmanState.show(System.out);
-        System.out.println();
-        System.out.println("WORD: " + word.show(letters));
+        hangmanState.show(out);
+        out.println();
+        out.println("WORD: " + word.show(letters));
         if (isDead()) {
-            System.out.println("SOLUTION: " + word.show());
+            out.println("SOLUTION: " + word.show());
         }
-        System.out.println("LETTERS: " + letters.show());
+        out.println("LETTERS: " + letters.show());
         if (isSolved()) {
-            System.out.println("Congratulations - you did it!!");
+            out.println("Congratulations - you did it!!");
         } else {
             if (isDead()) {
-                System.out.println("you lost this game - thanksfully not your life");
+                out.println("you lost this game - thanksfully not your life");
             } else {
-                System.out.println("not there yet - try some more letter");
+                out.println("not there yet - try some more letter");
             }
         }
         return Response.success();
     }
 
-    private boolean isDead() {
+    public boolean isDead() {
         return hangmanState.isDead();
     }
 

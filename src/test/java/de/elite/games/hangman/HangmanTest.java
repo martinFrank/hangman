@@ -3,22 +3,27 @@ package de.elite.games.hangman;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class HangmanTest {
+import java.util.Arrays;
+import java.util.List;
+
+public class HangManTest {
 
     @Test
-    public void test() {
-        HangmanState hangmanState = new HangmanState();
-        for (int i = 0; i <= 9; i++) {
-            System.out.println("i = " + i);
-            hangmanState.show(System.out);
-            System.out.println();
-            System.out.println();
-            Assert.assertFalse(hangmanState.isDead());
-            hangmanState.nextState();
+    public void doIt() {
+        Hangman hangman = new Hangman(System.out);
+        hangman.setup("Test");
+
+        Assert.assertFalse(hangman.isDead());
+
+        List<String> wrongLetters = Arrays.asList("A", "b", "c", "D", "F", "g", "h", "i", "j", "k", "l");
+        for (String letter : wrongLetters) {
+            hangman.tryLetter(letter);
         }
-        hangmanState.show(System.out);
-        System.out.println();
-        System.out.println();
-        Assert.assertTrue(hangmanState.isDead());
+
+        Assert.assertTrue(hangman.isDead());
+
+        hangman.setup("Test");
+
+        Assert.assertFalse(hangman.isDead());
     }
 }
