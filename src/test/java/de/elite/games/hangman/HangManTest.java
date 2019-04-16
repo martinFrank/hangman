@@ -1,5 +1,6 @@
 package de.elite.games.hangman;
 
+import de.elite.games.cli.Response;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -36,5 +37,22 @@ public class HangManTest {
         hangman.tryWord("tEst");
         Assert.assertTrue(hangman.isSolved());
         Assert.assertFalse(hangman.isDead());
+    }
+
+    @Test
+    public void testCommands() {
+        Hangman hangman = new Hangman(System.out);
+        hangman.setup("Test");
+        Assert.assertEquals(4, hangman.getCommands().asList().size());
+    }
+
+    @Test
+    public void testResonse() {
+        Hangman hangman = new Hangman(System.out);
+        Response response = hangman.show();
+        Assert.assertTrue(response.failed());
+        hangman.setup("Test");
+        response = hangman.show();
+        Assert.assertFalse(response.failed());
     }
 }
