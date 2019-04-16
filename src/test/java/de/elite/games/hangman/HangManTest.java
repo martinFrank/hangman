@@ -49,10 +49,18 @@ public class HangManTest {
     @Test
     public void testResonse() {
         Hangman hangman = new Hangman(System.out);
-        Response response = hangman.show();
-        Assert.assertTrue(response.failed());
+        Response responseShow = hangman.show();
+        Response responseLetter = hangman.tryLetter("a");
+        Response responseWord = hangman.tryWord("a");
+        Assert.assertTrue(responseShow.failed());
+        Assert.assertTrue(responseLetter.failed());
+        Assert.assertTrue(responseWord.failed());
         hangman.setup("Test");
-        response = hangman.show();
-        Assert.assertFalse(response.failed());
+        responseShow = hangman.show();
+        responseLetter = hangman.tryLetter("a");
+        responseWord = hangman.tryWord("a");
+        Assert.assertFalse(responseShow.failed());
+        Assert.assertFalse(responseLetter.failed());
+        Assert.assertFalse(responseWord.failed());
     }
 }
