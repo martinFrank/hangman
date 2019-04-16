@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SetRandomWordCommand extends Command<Hangman> {
 
-    private static final String filename = "./src/test/resources/words.txt";
+    private static final String FILENAME = "./src/test/resources/words.txt";
 
     public SetRandomWordCommand(Hangman hangman) {
         super(hangman, "setup");
@@ -18,7 +18,7 @@ public class SetRandomWordCommand extends Command<Hangman> {
 
     @Override
     public Response execute(List<String> parameter) {
-        List<String> words = new WordReader(filename).readAllWordsWithLength(8);
+        List<String> words = new WordReader(FILENAME).readAllWordsWithLength(8);
         Collections.shuffle(words);
         getApplication().setup(words.get(0).toUpperCase());
         return Response.success();

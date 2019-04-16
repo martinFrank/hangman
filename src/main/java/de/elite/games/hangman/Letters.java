@@ -6,6 +6,7 @@ import java.util.List;
 
 class Letters {
 
+    @SuppressWarnings("squid:S1700") //this is the crucial Part of the 'Letters class'
     private final List<String> letters = new ArrayList<>();
 
     Letters() {

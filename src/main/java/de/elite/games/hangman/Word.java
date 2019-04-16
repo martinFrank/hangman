@@ -2,6 +2,7 @@ package de.elite.games.hangman;
 
 class Word {
 
+    @SuppressWarnings("squid:S1700") //this is the crucial Part of the 'Word class'
     private final String word;
 
     Word(String word) {
