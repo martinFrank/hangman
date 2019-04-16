@@ -118,6 +118,17 @@ public class HangManTest {
         } else {
             Assert.fail();
         }
+    }
 
+    @Test
+    public void testSetWordCommand() {
+        Hangman hangman = new Hangman(System.out);
+        Optional<Command> setupCommand = hangman.getCommands().asList().stream().filter(c -> c.isIdentifier("setup")).findAny();
+        if (setupCommand.isPresent()) {
+            Response emptyResponse = setupCommand.get().execute(Collections.emptyList());
+            Assert.assertFalse(emptyResponse.failed());
+        } else {
+            Assert.fail();
+        }
     }
 }
