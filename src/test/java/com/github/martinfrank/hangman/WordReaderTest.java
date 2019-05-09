@@ -1,4 +1,4 @@
-package de.elite.games.hangman;
+package com.github.martinfrank.hangman;
 
 import org.junit.Assert;
 import org.junit.Test;

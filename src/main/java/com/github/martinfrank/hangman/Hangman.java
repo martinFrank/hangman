@@ -1,8 +1,8 @@
-package de.elite.games.hangman;
+package com.github.martinfrank.hangman;
 
-import de.elite.games.cli.CommandList;
-import de.elite.games.cli.CommandProvider;
-import de.elite.games.cli.Response;
+import com.github.martinfrank.cli.CommandList;
+import com.github.martinfrank.cli.CommandProvider;
+import com.github.martinfrank.cli.Response;
 
 import java.io.PrintStream;
 import java.util.Optional;

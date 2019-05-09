@@ -1,8 +1,8 @@
-package de.elite.games.hangman.command;
+package com.github.martinfrank.hangman.command;
 
-import de.elite.games.cli.Command;
-import de.elite.games.cli.Response;
-import de.elite.games.hangman.Hangman;
+import com.github.martinfrank.cli.Command;
+import com.github.martinfrank.cli.Response;
+import com.github.martinfrank.hangman.Hangman;
 
 import java.util.List;
 

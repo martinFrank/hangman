@@ -1,6 +1,6 @@
-package de.elite.games.hangman;
+package com.github.martinfrank.hangman;
 
-import de.elite.games.cli.CommandLineInterpreter;
+import com.github.martinfrank.cli.CommandLineInterpreter;
 
 import java.io.PrintStream;
 

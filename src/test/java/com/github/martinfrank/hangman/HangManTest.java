@@ -1,7 +1,7 @@
-package de.elite.games.hangman;
+package com.github.martinfrank.hangman;
 
-import de.elite.games.cli.Command;
-import de.elite.games.cli.Response;
+import com.github.martinfrank.cli.Command;
+import com.github.martinfrank.cli.Response;
 import org.junit.Assert;
 import org.junit.Test;
 

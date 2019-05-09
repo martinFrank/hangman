@@ -1,4 +1,4 @@
-package de.elite.games.hangman;
+package com.github.martinfrank.hangman;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
