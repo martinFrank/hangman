@@ -8,8 +8,10 @@ import java.util.List;
 
 public class WordReaderTest {
 
-    private static final String filename = "./src/test/resources/words.txt";
+    //    private static final String filename = "./src/test/resources/words.txt";
+    private static final String filename = "words.txt";
 
+    //    @Ignore //only working on local computer
     @Test
     public void testProperWordLength() {
         final int length = 8;
