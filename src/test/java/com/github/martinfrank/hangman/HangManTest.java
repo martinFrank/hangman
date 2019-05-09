@@ -125,8 +125,15 @@ public class HangManTest {
         Hangman hangman = new Hangman(System.out);
         Optional<Command> setupCommand = hangman.getCommands().asList().stream().filter(c -> c.isIdentifier("setup")).findAny();
         if (setupCommand.isPresent()) {
+
+            Response TooMuchWordResponse = setupCommand.get().execute(Arrays.asList("abc", "def"));
+            Assert.assertTrue(TooMuchWordResponse.failed());
+
             Response emptyResponse = setupCommand.get().execute(Collections.emptyList());
             Assert.assertFalse(emptyResponse.failed());
+
+            Response singleWordResponse = setupCommand.get().execute(Collections.singletonList("test"));
+            Assert.assertFalse(singleWordResponse.failed());
         } else {
             Assert.fail();
         }
