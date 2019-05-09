@@ -10,23 +10,19 @@ import java.util.List;
 
 public class WordReaderTest {
 
-    private static final String filename = "words.txt";
-
     @Test
     public void testProperWordLength() throws IOException {
         final int length = 8;
-        File f = new File(filename);
-        if (!f.exists()) {
-            f.createNewFile();
-        }
-        List<String> words = new WordReader(filename).readAllWordsWithLength(length);
+
+        File f = File.createTempFile("pre", "suf");
+        String fileName = f.getAbsolutePath() + File.pathSeparator + f.getName();
+        System.out.println("filename: " + f + " exists?=" + f.exists());
+        List<String> words = new WordReader(fileName).readAllWordsWithLength(length);
         Collections.shuffle(words);
         for (String word : words) {
             Assert.assertEquals(length, word.length());
         }
-        if (f.exists()) {
-            f.delete();
-        }
+
     }
 
     @Test
