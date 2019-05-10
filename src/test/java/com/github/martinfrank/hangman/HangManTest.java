@@ -48,7 +48,7 @@ public class HangManTest {
     public void testCommandList() {
         Hangman hangman = new Hangman(System.out);
         hangman.setup("Test");
-        Assert.assertEquals(4, hangman.getCommands().asList().size());
+        Assert.assertEquals(5, hangman.getCommands().asList().size());
     }
 
     @Test
