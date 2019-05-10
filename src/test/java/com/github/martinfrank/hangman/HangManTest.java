@@ -97,7 +97,7 @@ public class HangManTest {
 
     }
 
-    @Ignore // problems with file access on test server
+
     @Test
     public void testWordCommand() {
         Hangman hangman = new Hangman(System.out);
@@ -122,6 +122,7 @@ public class HangManTest {
         }
     }
 
+    @Ignore // problems with file access on test server
     @Test
     public void testSetWordCommand() {
         Hangman hangman = new Hangman(System.out);
