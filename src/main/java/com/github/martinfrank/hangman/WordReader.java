@@ -35,11 +35,5 @@ public class WordReader {
             Arrays.asList("ERROR");
         }
         return words;
-//        try (Stream<String> lines = Files.lines(Paths.get(filename), Charset.defaultCharset())) {
-//            return lines.filter(line -> line.length() == length).collect(Collectors.toList());
-//        } catch (IOException e) {
-//            LOGGER.debug("failed to load words... {}", e);
-//        }
-//        return Collections.emptyList();
     }
 }
