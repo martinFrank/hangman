@@ -3,14 +3,12 @@ package com.github.martinfrank.hangman;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Collections;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class WordReader {
 
@@ -22,11 +20,26 @@ public class WordReader {
     }
 
     public List<String> readAllWordsWithLength(int length) {
-        try (Stream<String> lines = Files.lines(Paths.get(filename), Charset.defaultCharset())) {
-            return lines.filter(line -> line.length() == length).collect(Collectors.toList());
+        BufferedReader br = new BufferedReader(new InputStreamReader(getClass().getClassLoader().getResourceAsStream(filename)));
+        String line = "";
+        List<String> words = new ArrayList<>();
+        try {
+            do {
+                line = br.readLine();
+                if (line != null && line.length() == length) {
+                    words.add(line);
+                }
+            } while (line != null);
         } catch (IOException e) {
             LOGGER.debug("failed to load words... {}", e);
+            Arrays.asList("ERROR");
         }
-        return Collections.emptyList();
+        return words;
+//        try (Stream<String> lines = Files.lines(Paths.get(filename), Charset.defaultCharset())) {
+//            return lines.filter(line -> line.length() == length).collect(Collectors.toList());
+//        } catch (IOException e) {
+//            LOGGER.debug("failed to load words... {}", e);
+//        }
+//        return Collections.emptyList();
     }
 }

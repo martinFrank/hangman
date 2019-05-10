@@ -3,7 +3,6 @@ package com.github.martinfrank.hangman;
 import com.github.martinfrank.cli.Command;
 import com.github.martinfrank.cli.Response;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
@@ -124,7 +123,6 @@ public class HangManTest {
         }
     }
 
-    @Ignore // problems with file access on test server
     @Test
     public void testSetWordCommand() {
         Hangman hangman = new Hangman(System.out);
@@ -139,6 +137,28 @@ public class HangManTest {
 
             Response singleWordResponse = setupCommand.get().execute(Collections.singletonList("test"));
             Assert.assertFalse(singleWordResponse.failed());
+        } else {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void testSetRandomWordCommand() {
+        Hangman hangman = new Hangman(System.out);
+        Optional<Command> setupCommand = hangman.getCommands().asList().stream().filter(c -> c.isIdentifier("setuprandom")).findAny();
+        if (setupCommand.isPresent()) {
+
+            Response emptyResponse = setupCommand.get().execute(Collections.emptyList());
+            Assert.assertTrue(emptyResponse.failed());
+
+            Response TooMuchWordResponse = setupCommand.get().execute(Arrays.asList("abc"));
+            Assert.assertTrue(TooMuchWordResponse.failed());
+
+            Response wrongSizeWordResponse = setupCommand.get().execute(Collections.singletonList("1"));
+            Assert.assertTrue(wrongSizeWordResponse.failed());
+
+            Response properSizeWordResponse = setupCommand.get().execute(Collections.singletonList("5"));
+            Assert.assertFalse(properSizeWordResponse.failed());
         } else {
             Assert.fail();
         }

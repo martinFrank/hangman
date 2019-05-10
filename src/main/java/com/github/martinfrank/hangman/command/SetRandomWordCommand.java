@@ -10,30 +10,33 @@ import java.util.List;
 
 public class SetRandomWordCommand extends Command<Hangman> {
 
-    private static final String FILENAME = "./src/main/resources/words.txt";
-
     public SetRandomWordCommand(Hangman hangman) {
-        super(hangman, "setup");
+        super(hangman, "setuprandom");
     }
 
     @Override
     public Response execute(List<String> parameters) {
-        String word = null;
-        if (parameters.isEmpty()) {
-            List<String> words = new WordReader(FILENAME).readAllWordsWithLength(8);
-            if (words.isEmpty()) {
-                return Response.fail("could not read default input file " + FILENAME);
+        if (parameters.size() != 1) {
+            return Response.fail("invalid parameter - you have to provide the length of the random word");
+        }
+        int length;
+        try {
+            length = Integer.parseInt(parameters.get(0));
+            if (length < 3) {
+                return Response.fail("length is too short, mus be 3++");
             }
-            Collections.shuffle(words);
-            word = words.get(0).toUpperCase();
+        } catch (NumberFormatException e) {
+            return Response.fail("" + parameters.get(0) + " is not a valid number");
         }
-        if (parameters.size() == 1) {
-            word = parameters.get(0).toUpperCase();
-        }
-        if (parameters.size() > 1) {
-            return Response.fail("too much words for hangman - only ONE word is allowed");
-        }
+        String word = getRandowmWord(length);
         getApplication().setup(word);
         return Response.success();
+    }
+
+    private String getRandowmWord(int length) {
+        WordReader wordReader = getApplication().getWordReader();
+        List<String> words = wordReader.readAllWordsWithLength(length);
+        Collections.shuffle(words);
+        return words.get(0);
     }
 }

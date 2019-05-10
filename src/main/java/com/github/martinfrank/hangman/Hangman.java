@@ -14,10 +14,12 @@ public class Hangman implements CommandProvider {
     private Letters letters = new Letters();
     private HangmanState hangmanState;
     private final PrintStream out;
+    private WordReader wordReader;
 
     Hangman(PrintStream out) {
         commandProvider = new HangmanCommandProvider(this);
         this.out = out;
+        setWordReader(new WordReader("./words.txt"));
     }
 
     @Override
@@ -105,5 +107,13 @@ public class Hangman implements CommandProvider {
             return Optional.of(Response.fail("you are already dead and cannot try any more " + message));
         }
         return Optional.empty();
+    }
+
+    public WordReader getWordReader() {
+        return wordReader;
+    }
+
+    private void setWordReader(WordReader wordReader) {
+        this.wordReader = wordReader;
     }
 }
