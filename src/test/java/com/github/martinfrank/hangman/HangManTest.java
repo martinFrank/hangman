@@ -133,7 +133,7 @@ public class HangManTest {
             Assert.assertTrue(TooMuchWordResponse.failed());
 
             Response emptyResponse = setupCommand.get().execute(Collections.emptyList());
-            Assert.assertFalse(emptyResponse.failed());
+            Assert.assertTrue(emptyResponse.failed());
 
             Response singleWordResponse = setupCommand.get().execute(Collections.singletonList("test"));
             Assert.assertFalse(singleWordResponse.failed());
