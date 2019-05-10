@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -138,6 +140,18 @@ public class HangManTest {
             Response singleWordResponse = setupCommand.get().execute(Collections.singletonList("test"));
             Assert.assertFalse(singleWordResponse.failed());
         } else {
+            Assert.fail();
+        }
+    }
+
+    @Test
+    public void mainTest() {
+        try {
+            InputStream original = System.in;
+            System.setIn(new ByteArrayInputStream("exit\n".getBytes()));
+            App.main(new String[]{});
+            System.setIn(original);
+        } catch (Exception e) {
             Assert.fail();
         }
     }
