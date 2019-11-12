@@ -39,13 +39,6 @@ public class HangManTest {
         Assert.assertFalse(hangman.isDead());
     }
 
-//    @Test
-//    public void testCommandList() {
-//        Hangman hangman = new Hangman(System.out);
-//        hangman.setup("Test");
-//        Assert.assertEquals(5, hangman.getCommandInterpreter().g.getCommands().asList().size());
-//    }
-
     @Test
     public void testResponse() {
         Hangman hangman = new Hangman(System.out);
@@ -64,110 +57,6 @@ public class HangManTest {
         Assert.assertFalse(responseWord.failed());
     }
 
-//    @Test
-//    public void testLetterCommand() {
-//        Hangman hangman = new Hangman(System.out);
-//        Optional<Command> letterCommand = hangman.getCommands().asList().stream().filter(c -> c.isIdentifier("letter")).findAny();
-//        if (letterCommand.isPresent()) {
-//            Response emptyResponse = letterCommand.get().execute(Collections.emptyList());
-//            Assert.assertTrue(emptyResponse.failed());
-//
-//            List<String> tooMuchLetter = Arrays.asList("a", "b");
-//            Response tooMuchLetterResponse = letterCommand.get().execute(tooMuchLetter);
-//            Assert.assertTrue(tooMuchLetterResponse.failed());
-//
-//            List<String> tooLongLetter = Collections.singletonList("abc");
-//            Response tooLongLetterResponse = letterCommand.get().execute(tooLongLetter);
-//            Assert.assertTrue(tooLongLetterResponse.failed());
-//
-//            List<String> perfectMatch = Collections.singletonList("a");
-//            Response perfectMatchResponse = letterCommand.get().execute(perfectMatch);
-//            Assert.assertTrue(perfectMatchResponse.failed());
-//
-//            hangman.setup("abc");
-//            perfectMatchResponse = letterCommand.get().execute(perfectMatch);
-//            Assert.assertFalse(perfectMatchResponse.failed());
-//        } else {
-//            Assert.fail();
-//        }
-//
-//    }
 
 
-//    @Test
-//    public void testWordCommand() {
-//        Hangman hangman = new Hangman(System.out);
-//        Optional<Command> wordCommand = hangman.getCommands().asList().stream().filter(c -> c.isIdentifier("solve")).findAny();
-//        if (wordCommand.isPresent()) {
-//            Response emptyResponse = wordCommand.get().execute(Collections.emptyList());
-//            Assert.assertTrue(emptyResponse.failed());
-//
-//            List<String> tooMuchWords = Arrays.asList("abc", "def");
-//            Response tooMuchWordsResponse = wordCommand.get().execute(tooMuchWords);
-//            Assert.assertTrue(tooMuchWordsResponse.failed());
-//
-//            List<String> perfectMatch = Collections.singletonList("abc");
-//            Response perfectMatchResponse = wordCommand.get().execute(perfectMatch);
-//            Assert.assertTrue(perfectMatchResponse.failed());
-//
-//            hangman.setup("abc");
-//            perfectMatchResponse = wordCommand.get().execute(perfectMatch);
-//            Assert.assertFalse(perfectMatchResponse.failed());
-//        } else {
-//            Assert.fail();
-//        }
-//    }
-
-//    @Test
-//    public void testSetWordCommand() {
-//        Hangman hangman = new Hangman(System.out);
-//        Optional<Command> setupCommand = hangman.getCommands().asList().stream().filter(c -> c.isIdentifier("setup")).findAny();
-//        if (setupCommand.isPresent()) {
-//
-//            Response TooMuchWordResponse = setupCommand.get().execute(Arrays.asList("abc", "def"));
-//            Assert.assertTrue(TooMuchWordResponse.failed());
-//
-//            Response emptyResponse = setupCommand.get().execute(Collections.emptyList());
-//            Assert.assertTrue(emptyResponse.failed());
-//
-//            Response singleWordResponse = setupCommand.get().execute(Collections.singletonList("test"));
-//            Assert.assertFalse(singleWordResponse.failed());
-//        } else {
-//            Assert.fail();
-//        }
-//    }
-
-//    @Test
-//    public void testSetRandomWordCommand() {
-//        Hangman hangman = new Hangman(System.out);
-//        Optional<Command> setupCommand = hangman.getCommands().asList().stream().filter(c -> c.isIdentifier("setuprandom")).findAny();
-//        if (setupCommand.isPresent()) {
-//
-//            Response emptyResponse = setupCommand.get().execute(Collections.emptyList());
-//            Assert.assertTrue(emptyResponse.failed());
-//
-//            Response TooMuchWordResponse = setupCommand.get().execute(Arrays.asList("abc"));
-//            Assert.assertTrue(TooMuchWordResponse.failed());
-//
-//            Response wrongSizeWordResponse = setupCommand.get().execute(Collections.singletonList("1"));
-//            Assert.assertTrue(wrongSizeWordResponse.failed());
-//
-//            Response properSizeWordResponse = setupCommand.get().execute(Collections.singletonList("5"));
-//            Assert.assertFalse(properSizeWordResponse.failed());
-//        } else {
-//            Assert.fail();
-//        }
-//    }
-
-//    @Test
-//    public void mainTest() {
-//        try {
-//            InputStream original = System.in;
-//            System.setIn(new ByteArrayInputStream("exit\n".getBytes()));
-//            App.main(new String[]{});
-//            System.setIn(original);
-//        } catch (Exception e) {
-//            Assert.fail();
-//        }
-//    }
 }

@@ -17,24 +17,13 @@ public class Hangman implements CommandInterpreterProvider {
     private WordReader wordReader;
 
     private final CommandInterpreter commandInterpreter;
-//    private final DefaultCommandList commandList;
-
     Hangman(PrintStream out) {
         commandProvider = new HangmanCommandProvider(this);
         commandInterpreter = new CommandInterpreter(commandProvider);
-//        setCommandInterpreter(commandInterpreter);
-//        commandList = new DefaultCommandList();
-//        commandList.add(new ExitCommand(this));
-//        commandList.add(new FaultyCommand(this));
 
         this.out = out;
         setWordReader(new WordReader("./words.txt"));
     }
-//
-//    @Override
-//    public CommandList getCommands() {
-//        return commandProvider.getCommands();
-//    }
 
     @Override
     public void stopCli() {
@@ -50,11 +39,6 @@ public class Hangman implements CommandInterpreterProvider {
     public CommandInterpreter getCommandInterpreter() {
         return commandInterpreter;
     }
-
-//    @Override
-//    public void setCommandInterpreter(CommandInterpreter commandInterpreter) {
-//        this.commandInterpreter = commandInterpreter;
-//    }
 
     public Response show() {
         if (word == null) {

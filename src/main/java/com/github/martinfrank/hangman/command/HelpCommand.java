@@ -13,6 +13,7 @@ public class HelpCommand extends Command<Hangman> {
     }
 
     @Override
+    @SuppressWarnings("squid:S106") //we're NOT logging exceptions into here, it's an console app
     public Response execute(List<String> parameter) {
         System.out.println("command overview:");
         System.out.println("'help' - shows this help");

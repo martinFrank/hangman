@@ -17,6 +17,7 @@ class HangmanCommandProvider implements CommandProvider {
         mapping.add(new TryLetterCommand(hangman));
         mapping.add(new TrySolutionCommand(hangman));
         mapping.add(new ExitCommand(hangman));
+        mapping.add(new HelpCommand(hangman));
     }
 
     @Override
