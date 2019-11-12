@@ -1,13 +1,13 @@
 package com.github.martinfrank.hangman;
 
-import com.github.martinfrank.cli.CommandList;
-import com.github.martinfrank.cli.CommandProvider;
+import com.github.martinfrank.cli.CommandInterpreter;
+import com.github.martinfrank.cli.CommandInterpreterProvider;
 import com.github.martinfrank.cli.Response;
 
 import java.io.PrintStream;
 import java.util.Optional;
 
-public class Hangman implements CommandProvider {
+public class Hangman implements CommandInterpreterProvider {
 
     private final HangmanCommandProvider commandProvider;
     private Word word;
@@ -16,16 +16,45 @@ public class Hangman implements CommandProvider {
     private final PrintStream out;
     private WordReader wordReader;
 
+    private final CommandInterpreter commandInterpreter;
+//    private final DefaultCommandList commandList;
+
     Hangman(PrintStream out) {
         commandProvider = new HangmanCommandProvider(this);
+        commandInterpreter = new CommandInterpreter(commandProvider);
+//        setCommandInterpreter(commandInterpreter);
+//        commandList = new DefaultCommandList();
+//        commandList.add(new ExitCommand(this));
+//        commandList.add(new FaultyCommand(this));
+
         this.out = out;
         setWordReader(new WordReader("./words.txt"));
     }
+//
+//    @Override
+//    public CommandList getCommands() {
+//        return commandProvider.getCommands();
+//    }
 
     @Override
-    public CommandList getCommands() {
-        return commandProvider.getCommands();
+    public void stopCli() {
+        commandInterpreter.stop();
     }
+
+    @Override
+    public void startCli() {
+        commandInterpreter.start();
+    }
+
+    @Override
+    public CommandInterpreter getCommandInterpreter() {
+        return commandInterpreter;
+    }
+
+//    @Override
+//    public void setCommandInterpreter(CommandInterpreter commandInterpreter) {
+//        this.commandInterpreter = commandInterpreter;
+//    }
 
     public Response show() {
         if (word == null) {
